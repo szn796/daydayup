@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="test"></div>
+</body>
+<script>
+    function createImg(url) {
+        return new Promise((resolve, reject) => {
+            const img = document.createElement('img');
+            img.src = url;
+            // img.onload是一个属性，会被调用
+            // 不是一个方法,包含回调(()=>{})
+            img.onload = () => {
+                resolve(img)
+            }
+            img.onerror = () => {
+                reject('err')
+            }
+        })
+    }
+    createImg('https://pica.zhimg.com/70/v2-2a263ad3549c93e80532952ad64a3fe2_1440w.avis?source=172ae18b&biz_tag=Post')
+        .then((element) => {
+                // ps：document.appendChild报错？？
+                // querySelector需要传#、.表示id或者class
+                const div = document.querySelector('.test')
+                div.appendChild(element);
+            },
+            (reason) => {
+                console.log(reason)
+            }
+        )
+</script>
+
+</html>

@@ -1,23 +1,27 @@
 function deepClone (obj, map = new WeakMap()) {
-  // 不是对象类型或者null（基本数据类型，则返回）
+  // 返回不是引用数据类型的数据
   if (!(typeof obj === 'object' && obj !== null)) return obj;
-  // 如果是正则或者日期类型，则包装后返回
+
+  // 处理正则和Date
   if (obj instanceof RegExp) return new RegExp(obj);
   if (obj instanceof Date) return new Date(obj);
 
-  // 判断下是否循环引用
   if (map.has(obj)) return map.get(obj);
 
+  // 创建新的容器，存放克隆数据
   const clone = Array.isArray(obj) ? [] : {}
+  // 后续clone数据会在遍历中写入
   map.set(obj, clone);
+
+  // 遍历
   for (const key in obj) {
-    // 不去获取原型链上的属性
     if (obj.hasOwnProperty(key)) {
-      clone[key] = deepClone(obj[key], map)
+      clone[key] = deepClone(obj[key], map);
     }
   }
-  return clone;
+  return clone
 }
+
 const obj = {
   a: 1,
   b: [1, 2, 3],

@@ -34,7 +34,7 @@ const obj = {
 }
 
 // 2.手写方法
-function deepClone(obj, map = new WeakMap()) {
+function deepClone (obj, map = new WeakMap()) {
   //WeakMap 用于存储已经拷贝过的对象，目的是解决循环引用的问题
 
   // 基本数据类型，直接返回
@@ -63,4 +63,6 @@ function deepClone(obj, map = new WeakMap()) {
 }
 
 const obj1 = deepClone(obj)
+obj1.b.push(99)
+console.log('szn', 'obj', obj)
 console.log('szn', 'obj1', obj1)

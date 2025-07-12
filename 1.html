@@ -6,26 +6,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
-<style>
-  .parent {
-    position: relative;
-    height: 200vh;
-  }
-
-  .child {
-    position: sticky;
-    top: 30px;
-    right: 100px;
-    background-color: pink;
-    width: 100px;
-    height: 100px;
-  }
-</style>
 
 <body>
-  <div class="parent">
-    <div class="child"></div>
-  </div>
+  <!-- grid-template-columns: 200px 1fr 200px;  -->
+
+  <style>
+    /* 保留原有 Flex 代码，新增 Grid 实现 */
+    .grid-container {
+      display: grid;
+      grid-template-columns: 200px 1fr 200px;
+      /* 关键 */
+      height: 500px;
+      /* 行 row */
+      /* 列 column */
+      /* 行高（绝对值、百分比、repeat函数、比例fr） */
+      grid-template-rows: 100px 100px 100px;
+      grid-template-rows: 33.3% 33.3% 33.3%;
+      grid-template-rows: repeat(3, 33.3%);
+      /* 单元格大小固定，父元素不固定，排满 */
+      grid-template-rows: repeat(auto-fill, 100px);
+      /* 按比例分割(第一个100px，剩下4等分，第二个占3份) */
+      grid-template-rows: 100px 3fr 1fr;
+
+      /* 列宽（同上方法） */
+      grid-template-columns: 100px 100px 100px;
+
+      /* 间距(row-gap、column-gap)可省略第二个值 */
+      grid-gap: 20px 20px;
+      grid-row-gap: 20px;
+      grid-column-gap: 20px;
+
+      /* 单元格顺序、默认：row、先行后列 */
+      grid-auto-flow: column;
+
+      /* 单元格水平垂直位置 (justify-item、align-items)缩写 */
+      place-items: center;
+      /* 单元格水平位置 */
+      justify-items: center;
+      /* 单元格垂直位置 */
+      align-items: center;
+
+      /* 内容区水平垂直位置 */
+      place-content: center;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .left {
+      background-color: pink;
+    }
+
+    .center {
+      background-color: green;
+    }
+
+    .right {
+      background-color: red;
+    }
+  </style>
+
+  <body>
+    <!-- Grid 布局 -->
+    <div class="grid-container">
+      <aside class="left">左</aside>
+      <main class="center">中</main>
+      <aside class="right">右</aside>
+    </div>
+  </body>
 </body>
 
 </html>
